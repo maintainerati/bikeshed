@@ -1,0 +1,13 @@
+.php_cs
+.php_cs.cache
+.phpunit
+.phpunit.result.cache
+.web-server-pid
+composer.lock
+npm-debug.log
+phpunit.xml
+yarn-error.log
+
+/node_modules/
+/var/
+/vendor/

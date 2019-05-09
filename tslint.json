@@ -1,0 +1,139 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "rules": {
+        "arrow-parens": true,
+        "arrow-return-shorthand": [true, "multiline"],
+        "await-promise": true,
+        "class-name": true,
+        "eofline": true,
+        "file-name-casing": [true, "kebab-case"],
+        "indent": [true, "spaces", 4],
+        "linebreak-style": [true, "LF"],
+        "match-default-export-name": true,
+        "max-line-length": [true, 120],
+        "member-access": [
+            true,
+            "check-accessor",
+            "check-constructor",
+            "check-parameter-property"
+        ],
+        "member-ordering": [
+            true,
+            {
+                "order": [
+                    "public-static-field",
+                    "public-instance-field",
+                    "private-static-field",
+                    "private-instance-field",
+                    "public-constructor",
+                    "private-constructor",
+                    "public-instance-method",
+                    "protected-instance-method",
+                    "private-instance-method"
+                ]
+            }
+        ],
+        "new-parens": true,
+        "newline-before-return": true,
+        "newline-per-chained-call": true,
+        "no-any": true,
+        "no-console": false,
+        "no-consecutive-blank-lines": true,
+        "no-irregular-whitespace": true,
+        "no-namespace": true,
+        "no-redundant-jsdoc": true,
+        "no-string-throw": true,
+        "no-unnecessary-callback-wrapper": true,
+        "no-unnecessary-qualifier": true,
+        "no-unsafe-any": true,
+        "no-unsafe-finally": true,
+        "no-var-requires": true,
+        "object-literal-shorthand": [true, "never"],
+        "object-literal-sort-keys": true,
+        "one-line": [
+            true,
+            "check-catch",
+            "check-finally",
+            "check-else",
+            "check-open-brace",
+            "check-whitespace"
+        ],
+        "only-arrow-functions": [true, "allow-declarations", "allow-named-functions"],
+        "ordered-imports": [
+            true,
+            {
+                "import-sources-order": "lowercase-last",
+                "named-imports-order": "lowercase-first"
+            }
+        ],
+        "prefer-const": true,
+        "prefer-for-of": true,
+        "prefer-object-spread": true,
+        "prefer-readonly": true,
+        "promise-function-async": true,
+        "quotemark": [
+            true,
+            "single",
+            "avoid-escape",
+            "avoid-template"
+        ],
+        "semicolon": [
+            true,
+            "always"
+        ],
+        "space-before-function-paren": [
+            true,
+            {
+                "anonymous": "always",
+                "named": "never",
+                "asyncArrow": "always",
+                "method": "never",
+                "constructor": "never"
+            }
+        ],
+        "strict-boolean-expressions": false,
+        "strict-type-predicates": true,
+        "trailing-comma": [
+            true,
+            {
+                "multiline": "always",
+                "singleline": "never"
+            }
+        ],
+        "triple-equals": true,
+        "typedef": [
+            true,
+            "call-signature",
+            "parameter",
+            "property-declaration",
+            "member-variable-declaration"
+        ],
+        "variable-name": [
+            true,
+            "ban-keywords",
+            "check-format",
+            "allow-leading-underscore"
+        ],
+        "whitespace": [
+            true,
+            "check-branch",
+            "check-decl",
+            "check-operator",
+            "check-module",
+            "check-separator",
+            "check-rest-spread",
+            "check-type",
+            "check-typecast",
+            "check-type-operator",
+            "check-preblock",
+            "check-postblock"
+        ]
+    },
+    "rulesDirectory": [],
+    "jsRules": {
+        "no-console": false
+    }
+}

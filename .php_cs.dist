@@ -1,0 +1,22 @@
+<?php
+
+return Camelot\CsFixer\Config::create()
+    ->addRules(
+        Camelot\CsFixer\Rules::create()
+            ->risky()
+            ->php71()
+    )
+    ->addRules([
+        '@PHPUnit60Migration:risky'  => true,
+        'declare_strict_types'       => true,
+        'native_function_invocation' => [
+            'include' => ['@compiler_optimized']
+        ],
+        'no_superfluous_phpdoc_tags' => true,
+        'ordered_class_elements'     => true,
+        'php_unit_strict'            => false,
+        'phpdoc_to_comment'          => false,
+    ])
+    ->in('src')
+    ->in('tests')
+;
