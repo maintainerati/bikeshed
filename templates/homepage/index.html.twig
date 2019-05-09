@@ -1,0 +1,108 @@
+{% extends '@Bikeshed/base.html.twig' %}
+{% use '@Bikeshed/_blocks/icons.html.twig' %}
+
+{% block title %}Welcome to the Bikeshed!{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>Welcome to the Bikeshed!</h1>
+        {% with { focus: focus, events: events } only %}{{ block('events') }}{% endwith %}
+    </div>
+{% endblock %}
+
+{% block events %}
+    {% for event in events %}
+        {%- with {
+            title: event.location ~ ', ' ~ event.city ~ ', ' ~ event.country|country,
+            id: event.id,
+            type: 'event',
+            element: 'h2',
+        } %}
+            {{ block('edit_header') }}
+        {%- endwith %}
+        {{ block('schedule', '@Bikeshed/homepage/schedule.html.twig') }}
+        {% for session in event.sessions %}
+            <hr>
+            {% with { focus: focus, event: event, session: session } only %}
+                {{ block('sessions') }}
+            {% endwith %}
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block sessions %}
+    <h3>Sessions</h3>
+    <section class="hero is-small is-bikeshed-medium-light is-bold">
+        <div class="hero-body">
+            <div class="content">
+                {%- with {
+                    title: session.startTime|date('H:i') ~ ' - ' ~ session.endTime|date('H:i') ~ ' Session',
+                    id: session.id,
+                    type: 'session',
+                    element: 'h4',
+                    } %}
+                    {{ block('edit_header') }}
+                {%- endwith %}
+            </div>
+        </div>
+    </section>
+    {% for space in session.spaces %}
+        {% with { focus: focus, event: event, session: session, space: space } only %}
+            {{ block('spaces') }}
+        {% endwith %}
+    {% endfor %}
+{% endblock %}
+
+{% block spaces %}
+    {%- set sessionUri = path('bikeshed_refocus', { event: event.id, session: session.id, space: space.id }) %}
+    <section class="hero is-small is-bikeshed-light is-bold has-margin-top">
+        <div class="hero-body">
+            <div class="content">
+                {% with {
+                    title: space.topic ? space.name ~ ': ' ~ space.topic : space.name,
+                    id: space.id,
+                    type: 'space',
+                    element: 'h5',
+                    header_classes: 'has-text-medium-dark is-italic',
+                    target: sessionUri,
+                    } %}
+                    {{ block('edit_header') }}
+                {% endwith %}
+            </div>
+        </div>
+    </section>
+
+    {% for note in space.notes[3:] %}
+        {% with { focus: focus, note: note } only %}
+            {{ block('note', '@Bikeshed/_blocks/note.html.twig') }}
+        {% endwith %}
+    {% endfor %}
+
+    <div class="message is-link">
+        <div class="message-body"><a href="{{ sessionUri }}">Jump to the space discussion &raquo;</a></div>
+    </div>
+{% endblock %}
+
+{% block edit_header %}
+    <div class="level is-mobile">
+        <div class="level-left">
+            <div class="level-item">
+                <{{ element }} class="is-inline is-marginless {{ header_classes|default }}">
+                {%- if target|default %}<a href="{{ target }}">{{ title }}</a>{% else %}{{ title }}{% endif -%}
+                </{{ element }}>
+            </div>
+        </div>
+        <div class="level-right has-text-bikeshed-dark">
+            <div class="level-item">
+                {% if is_granted('ROLE_ADMIN') %}
+                    {%- with {
+                        path: path('bikeshed_admin_editor', { id: id, type: type }),
+                        class: 'is-small',
+                        icon_class: 'far fa-edit'
+                        } %}{{ block('icon') }}
+                    {%- endwith -%}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

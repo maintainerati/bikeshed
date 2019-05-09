@@ -1,0 +1,46 @@
+{% block form_field %}
+    {%- set label_attr = { class: 'label' } -%}
+    {%- set attr = {
+        class: field_class|default('input') ~ ' is-fullwidth' }
+    -%}
+    {%- set icon = 'icon' -%}
+    <div class="field is-horizontal">
+        {%- if show_labels %}
+        <div class="field-label is-normal">{{ form_label(field, null, { label_attr: { class: 'label' } }) }}</div>
+        {%- endif %}
+        <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                {{ form_widget(field, { required: false, attr: attr, disabled: disabled|default(false)  }) }}
+                <span class="icon is-small is-left"><i class="{{ icon }}"></i></span>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block submit %}
+    <div class="field is-horizontal">
+        {%- if show_labels %}
+            <div class="field-label is-normal"></div>
+        {%- endif %}
+        <div class="field-body">
+            <div class="field">
+                <div class="level is-mobile is-marginless">
+                    <div class="level-left">
+                        <div class="level-item">
+                            {{ form_widget(field, { attr: {
+                                class: 'button',
+                                'data-form-id': field.parent.vars.id,
+                                'data-form-name': field.parent.vars.name
+                            }}) }}
+                        </div>
+                    </div>
+                    <div class="level-right">
+                        {% if show_branding %}{{ block('markdown', '@Bikeshed/_blocks/branding.html.twig') }}{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

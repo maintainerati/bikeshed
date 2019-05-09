@@ -1,0 +1,11 @@
+{% extends '@Bikeshed/base.html.twig' %}
+
+{% set asset_entry_point = 'editor' %}
+
+{% block title %}Editing{% endblock %}
+
+{% block body %}
+    {% set show_labels = true %}
+    {{ block('form', '@Bikeshed/_form/' ~ form.vars.id ~ '.html.twig') }}
+{% endblock %}
+

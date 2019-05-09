@@ -1,0 +1,27 @@
+{% block form %}
+    {% set async = true %}
+    {% set extra_classes = async == true ? ' is-hidden' : '' %}
+    {{ form_errors(form) }}
+    {{ form_start(form, { action: path('bikeshed_focus') } ) }}
+    {% with { field: form.eventId, icon: 'far fa-user' } %}{{ block('form_field') }}{% endwith %}
+    {% with { field: form.sessionId, icon: 'far fa-envelope' } %}{{ block('form_field') }}{% endwith %}
+    {% with { field: form.spaceId, icon: 'far fa-comment-dots' } %}{{ block('form_field') }}{% endwith %}
+    {{ form_widget(form.join, { attr: { class: 'button' ~ extra_classes } } ) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block form_field %}
+    {%- set label_attr = { class: 'label' } -%}
+    <div class="field is-horizontal">
+        <div class="field-body">
+            <div class="field">
+                <div class="control is-expanded has-icons-left{{ extra_classes }}" >
+                    <div class="select">
+                        {{ form_widget(field, { required: false, attr: { class: 'is-fullwidth' }, label: false  }) }}
+                    </div>
+                    <div class="icon is-small is-left"><i class="{{ icon }}"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

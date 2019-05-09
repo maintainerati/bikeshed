@@ -1,0 +1,29 @@
+{% extends '@Bikeshed/base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block sidebar %}{% endblock %}
+
+{% block body %}
+    <h1>Register</h1>
+    {{ form_errors(form) }}
+    {{ form_start(form) }}
+    {% with { field: form.oneTimeKey } %}{{ block('field') }}{% endwith %}
+    {% with { field: form.email } %}{{ block('field') }}{% endwith %}
+    {% with { field: form.handle } %}{{ block('field') }}{% endwith %}
+    {% with { field: form.plainPassword } %}{{ block('field') }}{% endwith %}
+    {% with { field: form.firstName } %}{{ block('field') }}{% endwith %}
+    {% with { field: form.lastName } %}{{ block('field') }}{% endwith %}
+    {{ form_widget(form.register, { attr: { class: 'button' }}) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block field %}
+    {{ form_errors(field) }}
+    <div class="field">
+        <div class="control">
+            {{ form_widget(field, { attr: { class: 'input is-large' } }) }}
+        </div>
+    </div>
+{% endblock %}

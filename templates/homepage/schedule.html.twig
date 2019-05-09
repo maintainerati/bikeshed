@@ -1,0 +1,31 @@
+{% block schedule %}
+    <h3>Schedule</h3>
+    {%- for session in event.sessions %}
+        {#- One session row #}
+        {%- for space in session.spaces %}
+            <div class="columns is-bordered{{ loop.index is even ? ' has-background-bikeshed-medium-light' : '' }}">
+                {{ block('row') }}
+            </div>
+        {%- endfor %}
+    {%- endfor %}
+{% endblock %}
+
+{% block row %}
+    {%- set sessionUri = path('bikeshed_refocus', { event: event.id, session: session.id, space: space.id }) %}
+    {# Session #}
+    <div class="column is-one-fifth">
+        <p class="has-text-centered"><a href="{{ sessionUri }}">{{ session.startTime|date('H:i') }} - {{ session.startTime|date('H:i') }}</a></p>
+    </div>
+    {# Space #}
+    <div class="column is-one-fifth">
+        <p class="has-text-centered"><a href="{{ sessionUri }}">{{ space.name }}</a></p>
+    </div>
+    {# Topic #}
+    <div class="column has-text-left-desktop has-text-centered-mobile">
+        <p><a href="{{ sessionUri }}">{{ space.topic ?: '&lt; Unannounced &gt;' }}</a></p>
+    </div>
+    {# Notes #}
+    <div class="column is-one-fifth">
+        <p class="has-text-right-desktop has-text-centered-mobile"><a href="{{ sessionUri }}">{{ space.notes|length }}</a></p>
+    </div>
+{% endblock %}

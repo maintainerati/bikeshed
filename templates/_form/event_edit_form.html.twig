@@ -1,0 +1,17 @@
+{% use '@Bikeshed/_form/_edit_form.html.twig' %}
+
+{% block form %}
+    {{ form_errors(form) }}
+    {{ form_start(form, { attr: { id: form.vars.id }}) }}
+    {{ block('form_fields') }}
+    {%- with { field: form.save, show_branding: false } %}{{ block('submit') }}{%- endwith %}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block form_fields %}
+    {{ form_row(form.id) }}
+    {% with { field: form.date } %}{{ block('form_field') }}{% endwith %}
+    {% with { field: form.country } %}{{ block('form_field') }}{% endwith %}
+    {% with { field: form.city } %}{{ block('form_field') }}{% endwith %}
+    {% with { field: form.location } %}{{ block('form_field') }}{% endwith %}
+{% endblock %}

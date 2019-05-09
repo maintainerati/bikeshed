@@ -1,0 +1,47 @@
+{% block header %}
+    {%- set url = asset('assets/images/header-main.jpeg', 'assets') %}
+{#    {%- do preload(url, { as: 'image', crossorigin: 'anonymous', integrity: app_sri_tag(url) }) %}#}
+{#    <section class="hero has-background-bikeshed-light">#}
+{#        <figure class="image">#}
+{#            <div class="header-image" style="--bg-image: url('{{ url }}');">#}
+{#                {% block header_image %}{% endblock %}#}
+{#                {{ block('header_overlay') }}#}
+{#            </div>#}
+{#        </figure>#}
+{#    </section>#}
+{% endblock %}
+
+{% block header_overlay %}
+    <div class="hero is-overlay has-text-centered">
+        <div class="hero-body is-vertical-center">
+            <div class="container">
+                {{ block('header_overlay_title') }}
+                {{ block('header_overlay_subtitle') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block header_overlay_title %}
+    <div class="columns">
+        <div class="column">
+            <p class="title is-size-1-tablet is-size-2-mobile has-text-weight-semibold">
+            {{ page.title|default(site_name) }}
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block header_overlay_subtitle %}
+    <div class="columns">
+        <div class="column">
+            <sup class="subtitle is-size-5">{{ page.subtitle|default(site_tagline) }}</sup>
+        </div>
+    </div>
+{% endblock %}
+
+{% block header_overlay_logo %}
+    <div class="image is-64x64">
+        <img src="{{ asset('logo.png', 'images') }}">
+    </div>
+{% endblock %}

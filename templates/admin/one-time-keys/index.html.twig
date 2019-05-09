@@ -1,0 +1,25 @@
+{% extends '@Bikeshed/base.html.twig' %}
+
+{% set asset_entry_point = 'app' %}
+
+{% block title %}One-Time Keys{% endblock %}
+
+{% block body %}
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+        <tr>
+            <th>One-Time Key</th>
+            <th>Valid Until</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for key in keys %}
+            <tr>
+                <td>{{ key.oneTimeKey }}</td>
+                <td>{{ key.validUntil|date('Y-m-d') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

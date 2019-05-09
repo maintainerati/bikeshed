@@ -1,0 +1,26 @@
+{% extends '@KnpMenu/menu.html.twig' %}
+
+{% block label %}
+    {%- set translation_domain = item.extra('translation_domain', 'messages') -%}
+    {%- set label = item.label -%}
+    {%- if translation_domain is not same as(false) -%}
+        {%- set label = label|trans(item.extra('translation_params', {}), translation_domain) -%}
+    {%- endif -%}
+    {%- if options.allow_safe_labels and item.extra('safe_label', false) %}{{ label|raw }}{% else %}{{ label }}{% endif -%}
+{% endblock %}
+
+{% block root %}
+    {%- set listAttributes = item.childrenAttributes -%}
+    {{ block('children') -}}
+{% endblock %}
+
+{% block spanElement %}
+    {%- import knp_menu as knp_menu -%}
+    <p class="menu-label"{{ knp_menu.attributes(item.labelAttributes) }}>{{ block('label') }}</p>
+{% endblock %}
+
+{% block linkElement %}
+    {%- import knp_menu as knp_menu -%}
+    {%- if matcher.isCurrent(item) %}{%  set class = options.currentClass %}{%- endif -%}
+    <a class="{{ class|default }}" href="{{ item.uri }}"{{ knp_menu.attributes(item.linkAttributes) }}>{{ block('label') }}</a>
+{% endblock %}

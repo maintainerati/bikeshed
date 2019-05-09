@@ -1,0 +1,37 @@
+{% block note %}
+    <div class="card">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-48x48">
+                        <img src="{{ asset('images/portrait-placeholder.png', 'bikeshed') }}" alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">{{ note.attendee.handle }}</p>
+                    <p class="subtitle is-6 is-italic"><time datetime="{{ note.date|date('c') }}">{{  note.date|date }}</time></p>
+                </div>
+                <div class="media-right">
+                    {% if is_granted('ROLE_ADMIN') or app.user.id == note.attendee.id %}
+                        {%- with {
+                            path: path('bikeshed_async_form', {
+                                event: focus.eventId,
+                                session: focus.sessionId,
+                                space: focus.spaceId,
+                                note: note.id,
+                            }),
+                            class: 'is-small note-edit-link',
+                            icon_class: 'far fa-edit',
+                            attribs: 'data-display-id="note-' ~ note.id ~ '" data-edit-id="note-edit-' ~ note.id ~ '"'
+                            } %}{{ block('icon', '@Bikeshed/_blocks/icons.html.twig') }}
+                        {%- endwith -%}
+                    {% endif %}
+                </div>
+            </div>
+            <div id="note-{{ note.id }}" class="content note-content">
+                {{ note.note|markdown }}
+            </div>
+            <div id="note-edit-{{ note.id }}" data-display-id="note-{{ note.id  }}" class="content note-content-edit-form is-hidden"></div>
+        </div>
+    </div>
+{% endblock %}

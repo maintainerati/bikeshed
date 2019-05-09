@@ -1,0 +1,10 @@
+{% extends '@Bikeshed/base.html.twig' %}
+
+{% set asset_entry_point = 'focus' %}
+
+{% block title %}Pick your Space{% endblock %}
+
+{% block body %}
+    {{ block('form', '@Bikeshed/focus/_form.html.twig') }}
+{% endblock %}
+

@@ -1,0 +1,17 @@
+{% block icon %}
+    {%- set class = ['icon', 'is-text', 'tooltip']|merge([class|default])|join(' ') -%}
+    {%- for name, value in data|default %}{% set attribs = attribs ~ ' ' ~ name ~ '=' ~ value|raw %}{% endfor -%}
+    <a href="{{ path|default }}" class="{{ class }}" data-tooltip="{{ tooltip|default }}" {{ attribs|default|raw }}>
+        <i class="{{ icon_class }}"></i>
+    </a>
+{% endblock %}
+
+{% block icons_check_cross %}
+    {% set class = class ?? 'is-small' %}
+    <span class="icon {{ class }}">
+        <i class="fas fa-check has-text-success is-hidden"></i>
+    </span>
+    <span class="icon {{ class }}">
+        <i class="fas fa-times has-text-danger is-hidden"></i>
+    </span>
+{% endblock %}

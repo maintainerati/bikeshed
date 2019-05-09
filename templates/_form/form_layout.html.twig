@@ -1,0 +1,21 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{#{%- block date_widget -%}#}
+{#    <div class="field">#}
+{#        <div class="control" {{ block('widget_container_attributes') }}>#}
+{#            <input class="input" type="date" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}>#}
+{#        </div>#}
+{#    </div>#}
+{#{%- endblock -%}#}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <div class="notification is-warning">
+            <ul class="is-marginless-top">
+                {%- for error in errors -%}
+                    <li>{{ error.message }}</li>
+                {%- endfor -%}
+            </ul>
+        </div>
+    {%- endif -%}
+{%- endblock -%}

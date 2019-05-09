@@ -1,0 +1,34 @@
+{% block navbar %}
+    <nav class="navbar is-fixed-top is-bikeshed-light">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{ path('bikeshed_homepage') }}">
+                <div class="image"><img src="{{ preload(asset('images/logo.svg', 'bikeshed'), { as: 'image' }) }}"></div>
+            </a>
+            <div class="navbar-burger burger" data-target="navbar-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div id="navbar-menu" class="navbar-menu">
+            <div class="navbar-start has-text-weight-bold">
+                {%- with { menu: 'bikeshed_main' } only %}{{ block('menu') }}{% endwith -%}
+            </div>
+            <div class="navbar-end has-text-weight-bold">
+                {%- if is_granted('ROLE_ADMIN') -%}
+                {%- with { menu: 'bikeshed_admin' } only %}{{ block('menu') }}{% endwith -%}
+                {%- endif -%}
+                <li class="navbar-item"><a class="" href="{{ path('bikeshed_logout') }}">Logout</a></li>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block menu %}
+    {{- knp_menu_render(knp_menu_get(menu), {
+        branch_class: '',
+        currentClass: 'is-active',
+        currentAsLink: false,
+        leaf_class: 'navbar-item',
+    }) -}}
+{% endblock %}

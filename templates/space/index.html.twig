@@ -1,0 +1,16 @@
+{% extends '@Bikeshed/base.html.twig' %}
+{% use '@Bikeshed/_form/note_edit_form.html.twig' %}
+
+{% block title %}{{ space.name }} Space{% endblock %}
+
+{% block body %}
+    <h2 class="title">{{ space.topic ?: '&lt; no topic set &gt;' }}
+        <span class="subtitle is-pulled-right">{{ space.name }}: {{ space.session.startTime|date('H:i') }} - {{ space.session.endTime|date('H:i') }}</span></h2>
+    <div id="notes">
+        {% for note in notes %}{{ block('note', '@Bikeshed/_blocks/note.html.twig') }}{% endfor %}
+    </div>
+
+    <hr>
+    <h4 class="subtitle is-marginless-bottom">Post something of your own</h4>
+    {% with { form: form, submit: form.save, show_labels: false } %}{{ block('form') }}{% endwith %}
+{% endblock %}

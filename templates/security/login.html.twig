@@ -1,0 +1,86 @@
+{% extends '@Bikeshed/base.html.twig' %}
+{% use '@Bikeshed/_blocks/icons.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block sidebar %}{% endblock %}
+
+{% block body %}
+    <form method="post">
+        <div class="content">
+            <label class="label is-large">Sign in</label>
+
+            {% if error %}
+                <div class="notification is-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {{ block('field_email') }}
+            {{ block('field_password') }}
+            {{ block('field_remember_me') }}
+            {{ block('field_submit') }}
+            <a class="button" href="{{ path('bikeshed_register') }}">Register</a>
+        </div>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    </form>
+{% endblock %}
+
+{% block field_email %}
+    <div class="field">
+        <p class="control has-icons-left has-icons-right">
+        <input type="email"
+               class="input is-large"
+               placeholder="Email address"
+               name="email"
+               id="inputEmail"
+               value="{{ last_username }}"
+               required
+               autofocus
+        />
+        <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+        </span>
+        {% with { class: 'is-small is-right' } only %}{{ block('icons_check_cross') }}{% endwith %}
+        </p>
+    </div>
+{% endblock %}
+
+{% block field_password %}
+    <div class="field">
+        <p class="control has-icons-left">
+        <input type="password"
+               class="input is-large"
+               placeholder="Password"
+               name="password"
+               id="inputPassword"
+               required
+        />
+        <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+        </span>
+        {% with { class: 'is-small is-right' } only %}{{ block('icons_check_cross') }}{% endwith %}
+        </p>
+    </div>
+{% endblock %}
+
+{% block field_remember_me %}
+    <div class="field">
+        <p class="control">
+        <input type="checkbox"
+               class="checkbox is-large"
+               id="remember"
+               name="remember" checked
+        />
+        <label for="remember">Keep me logged in</label>
+        </p>
+    </div>
+{% endblock %}
+
+{% block field_submit %}
+    <div class="field">
+        <p class="control">
+        <button class="button is-success">Sign in</button>
+        </p>
+    </div>
+{% endblock %}

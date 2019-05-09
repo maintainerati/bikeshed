@@ -1,0 +1,39 @@
+{% set asset_entry_point = asset_entry_point ?? 'app' %}
+{% set side = 'is-one-fifth' %}
+{% set main = 'is-three-fifths' %}
+{% set add_critical = add_critical ?? true %}
+{% set cred_flag = 'anonymous' %}
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ page_title|default('Bikeshed') }}{% endblock %}</title>
+{% block preload %}{{ block('preload', '@Bikeshed/_partials/assets.html.twig') }}{% endblock %}
+{% block meta %}{{ block('meta', '@Bikeshed/_partials/assets.html.twig') }}{% endblock %}
+</head>
+<body class="has-background-bikeshed-light">
+{% block header %}{{ block('header', '@Bikeshed/_partials/header.html.twig') }}{% endblock %}
+{% block navbar %}{{ block('navbar', '@Bikeshed/_partials/navbar.html.twig') }}{% endblock %}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column {{ side }}" id="sidebar-left"></div>
+            <div class="column {{ main }} has-background-bikeshed-light" id="content">
+                <div class="content">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+            <div class="column {{ side }}" id="sidebar-right"></div>
+        </div>
+    </div>
+</section>
+
+{% block footer %}{{ block('footer', '_partials/footer.html.twig') }}{% endblock %}
+{% block stylesheets %}{{ encore_entry_link_tags(asset_entry_point, null, 'Bikeshed') }}{% endblock %}
+
+{% block javascripts %}{{ encore_entry_script_tags(asset_entry_point, null, 'Bikeshed') }}{% endblock %}
+{#{% block preload %}{{ block('preload', '@Bikeshed/_partials/assets.html.twig') }}{% endblock %}#}
+<div id="emoji" data-emoji='{{ emoji|default|raw }}' hidden></div>
+</body>
+</html>

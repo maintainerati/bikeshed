@@ -1,0 +1,39 @@
+{% block meta %}
+    {{- block('favicons') -}}
+    {% if add_critical %}{{ block('critical') }}{% endif %}
+{% endblock %}
+
+{% block preload %}
+{#    {% for link in encore_entry_css_files(asset_entry_point) %}#}
+{#        {% set url = asset(link, 'bikeshed') %}#}
+{#        {% do preload(url, { as: 'style', crossorigin: cred_flag, integrity: app_sri_tag(url) }) %}#}
+{#        {% do preload(url, { as: 'style' }) %}#}
+{#    {% endfor %}#}
+{#    {% for script in encore_entry_js_files(asset_entry_point) %}#}
+{#        {% set url = asset(script, 'bikeshed') %}#}
+{#        {% do preload(url, { as: 'script', crossorigin: cred_flag, integrity: app_sri_tag(url) }) %}#}
+{#        {% do preload(url, { as: 'script' }) %}#}
+{#    {% endfor %}#}
+{#    {% do encore_entry_reset() %}#}
+{#    {% set fonts = [#}
+{#        'assets/fonts/montserrat-v12-latin-regular.woff2',#}
+{#        'assets/fonts/montserrat-v12-latin-700.woff2',#}
+{#    ] %}#}
+{#    {% for font in fonts %}#}
+{#        {% set url = asset(font, 'bikeshed') %}#}
+{#        {% do preload(url, { as: 'font', type: 'font/woff2', crossorigin: cred_flag, integrity: app_sri_tag(url) }) %}#}
+{#        {% do preload(url, { as: 'font', type: 'font/woff2' }) %}#}
+{#    {% endfor %}#}
+{% endblock %}
+
+{% block favicons %}
+    <link xmlns="http://www.w3.org/1999/xhtml" rel="shortcut icon" href="{{ asset('icons/favicon.ico', 'bikeshed') }}"/>
+    <link xmlns="http://www.w3.org/1999/xhtml" rel="icon" type="image/png" sizes="16x16" href="{{ asset('icons/favicon-16x16.png', 'bikeshed') }}"/>
+    <link xmlns="http://www.w3.org/1999/xhtml" rel="icon" type="image/png" sizes="32x32" href="{{ asset('icons/favicon-32x32.png', 'bikeshed') }}"/>
+{#    {%- do preload(asset('assets/icons/manifest.json', 'bikeshed'), { as: 'fetch' }) %}#}
+{#    {{- include('@Bikeshed/_partials/favicons.html.twig', ignore_missing = true) }}#}
+{% endblock %}
+
+{% block critical %}
+    <style>{{ include('@BikeshedPublic/critical.css', ignore_missing = true) }}</style>
+{% endblock %}
