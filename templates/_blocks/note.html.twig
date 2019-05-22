@@ -15,11 +15,11 @@
                     {% if is_granted('ROLE_ADMIN') or app.user.id == note.attendee.id %}
                         {%- with {
                             path: path('bikeshed_async_form', {
-                                event: focus.eventId,
-                                session: focus.sessionId,
-                                space: focus.spaceId,
-                                note: note.id,
-                            }),
+                            event: focus.eventId,
+                            session: note.space.session.id,
+                            space: note.space.id,
+                            note: note.id,
+                        }),
                             class: 'is-small note-edit-link',
                             icon_class: 'far fa-edit',
                             attribs: 'data-display-id="note-' ~ note.id ~ '" data-edit-id="note-edit-' ~ note.id ~ '"'

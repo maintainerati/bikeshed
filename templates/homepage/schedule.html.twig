@@ -14,7 +14,7 @@
     {%- set sessionUri = path('bikeshed_refocus', { event: event.id, session: session.id, space: space.id }) %}
     {# Session #}
     <div class="column is-one-fifth">
-        <p class="has-text-centered"><a href="{{ sessionUri }}">{{ session.startTime|date('H:i') }} - {{ session.startTime|date('H:i') }}</a></p>
+        <p class="has-text-centered"><a href="{{ sessionUri }}">{{ session.startTime|date('H:i') }} - {{ session.endTime|date('H:i') }}</a></p>
     </div>
     {# Space #}
     <div class="column is-one-fifth">
